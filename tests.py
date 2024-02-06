@@ -1,26 +1,33 @@
 import pytest
-from main import BooksCollector
 
-# класс TestBooksCollector объединяет набор тестов, которыми мы покрываем наше приложение BooksCollector
-# обязательно указывать префикс Test
 class TestBooksCollector:
 
-    # пример теста:
-    # обязательно указывать префикс test_
-    # дальше идет название метода, который тестируем add_new_book_
-    # затем, что тестируем add_two_books - добавление двух книг
-    def test_add_new_book_add_two_books(self):
-        # создаем экземпляр (объект) класса BooksCollector
-        collector = BooksCollector()
 
-        # добавляем две книги
-        collector.add_new_book('Гордость и предубеждение и зомби')
-        collector.add_new_book('Что делать, если ваш кот хочет вас убить')
+    def test_add_new_book_add_two_books(self, setup_bookcollector):
 
-        # проверяем, что добавилось именно две
-        # словарь books_rating, который нам возвращает метод get_books_rating, имеет длину 2
-        assert len(collector.get_books_rating()) == 2
+        setup_bookcollector.add_new_book('Гордость и предубеждение и зомби')
+        setup_bookcollector.add_new_book('Что делать, если ваш кот хочет вас убить')
+        assert len(setup_bookcollector.get_books_genre()) == 2
 
-    # напиши свои тесты ниже
-    # чтобы тесты были независимыми в каждом из них создавай отдельный экземпляр класса BooksCollector()
+    @pytest.mark.parametrize('name', ['', 'Ля комедия 2, или Совсем другая история с элементами большого искусства'])
+    def test_add_new_book_add_two_inappropriate_book(self, setup_bookcollector, name):
+        setup_bookcollector.add_new_book(name)
+        assert len(setup_bookcollector.get_books_genre()) == 0
+
+    def test_add_new_book_books_name_in_books_genre(self, setup_bookcollector):
+        setup_bookcollector.add_new_book('Мастер и Маргарита')
+        assert 'Мастер и Маргарита' in setup_bookcollector.get_books_genre()
+
+    def test_set_book_genre_added_book(self, setup_bookcollector):
+        setup_bookcollector.add_new_book('Мастер и Маргарита')
+        setup_bookcollector.set_book_genre('Мастер и Маргарита', 'Проза')
+        assert setup_bookcollector.get_book_genre("Мастер и Маргарита") == "Проза"
+
+    @pytest.mark.parametrize('name', ['Гроздья гнева'])
+    def test_get_books_with_specific_genre_get_specific_genre(self, setup_bookcollector, name):
+        setup_bookcollector.add_new_book(name)
+        setup_bookcollector.set_book_genre(name, 'Проза')
+        setup_bookcollector.add_new_book('Мулан')
+        setup_bookcollector.set_book_genre('Мулан', 'Мультфильмы')
+        assert name in setup_bookcollector.get_books_with_specific_genre('Проза')
 
