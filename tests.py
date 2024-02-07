@@ -31,3 +31,47 @@ class TestBooksCollector:
         setup_bookcollector.set_book_genre('Мулан', 'Мультфильмы')
         assert name in setup_bookcollector.get_books_with_specific_genre('Проза')
 
+    @pytest.mark.parametrize('name', [{"Гроздья гнева":"Проза", "Мулан":"Мультфильмы", "Пятница начинается в субботу":"Фантастика"}])
+    def test_get_books_genre_add_books_with_genre(self, setup_bookcollector, name):
+        setup_bookcollector.add_new_book("Гроздья гнева")
+        setup_bookcollector.set_book_genre("Гроздья гнева","Проза")
+        setup_bookcollector.add_new_book("Мулан")
+        setup_bookcollector.set_book_genre("Мулан","Мультфильмы")
+        setup_bookcollector.add_new_book("Пятница начинается в субботу")
+        setup_bookcollector.set_book_genre("Пятница начинается в субботу", "Фантастика")
+        assert setup_bookcollector.get_books_genre() == name
+
+    def test_get_books_for_children_add_kids_genre(self, setup_bookcollector):
+        setup_bookcollector.add_new_book("Мулан")
+        setup_bookcollector.set_book_genre("Мулан", "Мультфильмы")
+        assert "Мулан" in setup_bookcollector.get_books_for_children()
+
+    def test_book_in_favorites_add_book(self, setup_bookcollector):
+        setup_bookcollector.add_new_book("Гроздья гнева")
+        setup_bookcollector.add_book_in_favorites("Гроздья гнева")
+        assert "Гроздья гнева" in setup_bookcollector.get_list_of_favorites_books()
+
+    def test_delete_book_from_favorites_add_and_delete_book(self, setup_bookcollector):
+        setup_bookcollector.add_new_book("Гроздья гнева")
+        setup_bookcollector.add_book_in_favorites("Гроздья гнева")
+        setup_bookcollector.delete_book_from_favorites("Гроздья гнева")
+        assert "Гроздья гнева" not in setup_bookcollector.get_list_of_favorites_books()
+
+    def test_get_list_of_favorites_books_add_book_in_favorites(self, setup_bookcollector):
+        setup_bookcollector.add_new_book("Гроздья гнева")
+        setup_bookcollector.add_book_in_favorites("Гроздья гнева")
+        assert "Гроздья гнева" in setup_bookcollector.get_list_of_favorites_books()
+
+    def test_initialization_books_genre_empty_dict(self, setup_bookcollector):
+        assert setup_bookcollector.books_genre == {}
+
+    def test_initialization_favorites_empty_list(self, setup_bookcollector):
+        assert setup_bookcollector.favorites == []
+
+    @pytest.mark.parametrize('genre', ['Фантастика', 'Ужасы', 'Детективы', 'Мультфильмы', 'Комедии', 'Проза'])
+    def test_intialization_genre_check_the_list(self, setup_bookcollector, genre):
+        assert genre in setup_bookcollector.genre
+
+    def test_intialization_genre_age_rating_check_the_list(self, setup_bookcollector):
+        for genre_with_rating in setup_bookcollector.genre_age_rating:
+            assert genre_with_rating in setup_bookcollector.genre_age_rating
