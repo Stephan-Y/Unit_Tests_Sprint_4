@@ -6,3 +6,4 @@ black_wall.py
 .pytest_cache
 __pycache__
 .coverage
+.DS_Store
