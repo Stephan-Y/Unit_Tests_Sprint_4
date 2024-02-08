@@ -35,6 +35,6 @@ pytest -v tests.py
 
 pytest --cov=main
 
-**Расширеная оценка покрытия:**
 
-pytest --cov=main --cov-report=html
+
+
