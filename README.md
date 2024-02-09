@@ -34,3 +34,4 @@ pytest -v tests.py
 **Оценка покрытия выполняется командой:**
 
 pytest --cov=main
+
