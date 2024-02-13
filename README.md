@@ -19,15 +19,11 @@
 * test_delete_book_from_favorites_add_and_delete_book - проверяем, что метод delete_book_from_favorites, удаляет определенную книгу из избранного
 * test_get_list_of_favorites_books_add_book_in_favorites - проверяем включена ли определенная книга в избранное, возращаемая маетодом get_list_of_favorites_books
 
-
-
-
-<!--- 
 ### Тесты на инициализацию: ###
 * test_initialization_books_genre_empty_dict - проверяем пустой словарь books_genre
 * test_initialization_favorites_empty_list - проверяем пустой список favorites
 * test_intialization_genre_check_the_list - проверяем значения в списке genre
-* test_intialization_genre_age_rating_check_the_list - проверяем значения в списке genre_age_rating --->
+* test_intialization_genre_age_rating_check_the_list - проверяем значения в списке genre_age_rating
 
 
 

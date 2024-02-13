@@ -64,21 +64,16 @@ class TestBooksCollector:
         assert "Гроздья гнева" in setup_bookcollector.get_list_of_favorites_books()
 
 
+    def test_initialization_books_genre_empty_dict(self, setup_bookcollector):
+        assert setup_bookcollector.books_genre == {}
 
+    def test_initialization_favorites_empty_list(self, setup_bookcollector):
+        assert setup_bookcollector.favorites == []
 
+    @pytest.mark.parametrize('genre', ['Фантастика', 'Ужасы', 'Детективы', 'Мультфильмы', 'Комедии', 'Проза'])
+    def test_intialization_genre_check_the_list(self, setup_bookcollector, genre):
+        assert genre in setup_bookcollector.genre
 
-
-
-    # def test_initialization_books_genre_empty_dict(self, setup_bookcollector):
-    #     assert setup_bookcollector.books_genre == {}
-    #
-    # def test_initialization_favorites_empty_list(self, setup_bookcollector):
-    #     assert setup_bookcollector.favorites == []
-    #
-    # @pytest.mark.parametrize('genre', ['Фантастика', 'Ужасы', 'Детективы', 'Мультфильмы', 'Комедии', 'Проза'])
-    # def test_intialization_genre_check_the_list(self, setup_bookcollector, genre):
-    #     assert genre in setup_bookcollector.genre
-    #
-    # def test_intialization_genre_age_rating_check_the_list(self, setup_bookcollector):
-    #     for genre_with_rating in setup_bookcollector.genre_age_rating:
-    #         assert genre_with_rating in setup_bookcollector.genre_age_rating
+    def test_intialization_genre_age_rating_check_the_list(self, setup_bookcollector):
+        for genre_with_rating in setup_bookcollector.genre_age_rating:
+            assert genre_with_rating in setup_bookcollector.genre_age_rating
