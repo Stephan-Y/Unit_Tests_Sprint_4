@@ -7,3 +7,7 @@ black_wall.py
 __pycache__
 .coverage
 .DS_Store
+conftest.cpython-312-pytest-8.0.0.pyc
+main.cpython-312.pyc
+tests.cpython-312-pytest-8.0.0.pyc
+htmlcov
