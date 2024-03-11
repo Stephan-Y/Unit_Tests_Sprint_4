@@ -1,5 +1,4 @@
 # QA_tests #
-Training 'Automation engineer on python'  
 Покрываю юнит-тестами приложение BooksCollector.
 Оно позволяет установить жанр книг и добавить их в избранное.
 
